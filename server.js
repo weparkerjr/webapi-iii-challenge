@@ -17,7 +17,7 @@ server.use("/api/users", userRouter)
 
 // HOMEPAGE WITH LOGGER
 server.get('/', logger, (req, res) => {
-  res.send(`<h2>Let's write some middleware!</h2>`);
+  res.send(`<h2>Edwin Parker's webapi-iii AND -iv challenge</h2>`);
 });
 
 
