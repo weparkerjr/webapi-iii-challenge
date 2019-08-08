@@ -24,9 +24,9 @@ server.get('/', logger, (req, res) => {
 //CUSTOM MIDDLEWARE
 function logger(req, res, next) {
   console.log(new Date().toUTCString());
-  next();
+  // next();
   console.log(`${req.method} Request`);
-  next();
+  // next();
   console.log(req.url);
   next();
 };
