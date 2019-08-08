@@ -54,18 +54,18 @@ router.get('/:id', (req, res) => {
 
 });
 
-// router.get('/:id/posts', (req, res) => {
-//     const userId = req.params.id;
+router.get('/:id/posts', (req, res) => {
+    const userId = req.params.id;
 
-// 	Users.getUserPosts(userId)
-// 		.then(data => {
-// 			res.status(200).json(data);
-// 		})
-// 		.catch(err => {
-// 			res.status(500).json({ error: 'The users posts could not be retrieved.' });
-// 		});
+	Users.getUserPosts(userId)
+		.then(data => {
+			res.status(200).json(data);
+		})
+		.catch(err => {
+			res.status(500).json({ error: 'The users posts could not be retrieved.' });
+		});
 
-// });
+});
 
 // router.delete('/:id', (req, res) => {
 //     const id = req.params.id;
