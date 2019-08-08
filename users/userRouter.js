@@ -79,19 +79,19 @@ router.get('/:id/posts', (req, res) => {
 
 // });
 
-// router.put('/:id', (req, res) => {
-//     const { id } = req.params;
-// 	const changes = req.body;
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+	const changes = req.body;
 
-// 	Users.update(id, changes)
-// 		.then(data => {
-// 			res.status(200).json(changes);
-// 		})
-// 		.catch(err => {
-// 			res.status(500).json({ error: 'The post information could not be modified.' });
-// 		});
+	Users.update(id, changes)
+		.then(data => {
+			res.status(200).json(changes);
+		})
+		.catch(err => {
+			res.status(500).json({ error: 'The post information could not be modified.' });
+		});
 
-// });
+});
 
 //custom middleware
 
