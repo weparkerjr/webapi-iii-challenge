@@ -1,5 +1,6 @@
 const express = require('express');
 const Users = require('../users/userDb.js');
+const Posts = require('../posts/postDb.js');
 
 const router = express.Router();
 
@@ -18,19 +19,23 @@ router.post('/', validateUser, (req, res) => {
 });
 
 // 2. POST POSTS BY ID---------------------------------------
-// router.post('/:id/posts', validateUserId, validatePost, (req, res) => {
-//     const id = req.user.id;
-//     const text = req.body.text;
-//     console.log(text, id);
+router.post('/:id/posts', (req, res) => {
+    //const id = req.user.id;
+    const text = req.body;
+    console.log(text);
 
-//     Users.insert({text, user_id:id})
-//     .then(newPost => {
-//         res.status(201).json(newPost)
-//     })
-//     .catch (err => {
-//         res.status(500).json({ errorMessage: 'There was an error while saving the post to the database.' });
-//     });
-// });
+    if(text) {
+        Posts.insert(text)
+        .then(newPost => {
+            res.status(201).json(newPost)
+        })
+        .catch (err => {
+            res.status(500).json({ errorMessage: 'There was an error while saving the post to the database.' });
+        });
+    }
+
+
+});
 
 // 3. GET ALL USERS---------------------------------------
 router.get('/', (req, res) => {
