@@ -3,7 +3,7 @@ const Users = require('../users/userDb.js');
 
 const router = express.Router();
 
-
+// 1. POST USER---------------------------------------
 router.post('/', validateUser, (req, res) => {
     const userName = req.body;
     console.log(userName)
@@ -17,6 +17,7 @@ router.post('/', validateUser, (req, res) => {
     });
 });
 
+// 2. POST POSTS BY ID---------------------------------------
 // router.post('/:id/posts', validateUserId, validatePost, (req, res) => {
 //     const id = req.user.id;
 //     const text = req.body.text;
@@ -31,6 +32,7 @@ router.post('/', validateUser, (req, res) => {
 //     });
 // });
 
+// 3. GET ALL USERS---------------------------------------
 router.get('/', (req, res) => {
     Users.get()
     .then(users => {
@@ -41,6 +43,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// 4. GET USERS BY ID---------------------------------------
 router.get('/:id', (req, res) => {
     const id = req.params.id;
 
@@ -54,6 +57,7 @@ router.get('/:id', (req, res) => {
 
 });
 
+// 5. GET POSTS BY ID---------------------------------------
 router.get('/:id/posts', (req, res) => {
     const userId = req.params.id;
 
@@ -67,18 +71,20 @@ router.get('/:id/posts', (req, res) => {
 
 });
 
-// router.delete('/:id', (req, res) => {
-//     const id = req.params.id;
-// 	Users.remove(id)
-// 		.then(data => {
-// 			res.status(200).json({ message: 'You have successfully deleted this user.' });
-// 		})
-// 		.catch(err => {
-// 			res.status(500).json({ error: 'This user could not be deleted' });
-// 		});
+// 6. DELETE USERS BY ID
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+	Users.remove(id)
+		.then(data => {
+			res.status(200).json({ message: 'You have successfully deleted this user.' });
+		})
+		.catch(err => {
+			res.status(500).json({ error: 'This user could not be deleted' });
+		});
 
-// });
+});
 
+// 7. UPDATE USERS BY ID
 router.put('/:id', (req, res) => {
     const { id } = req.params;
 	const changes = req.body;
@@ -122,7 +128,8 @@ function validatePost(req, res, next) {
 		res.status(400).json({ message: 'missing post data' });
 	} else if (!req.body.text) {
 		res.status(400).json({ message: 'missing required text field' });
-	}
+    }
+    next()
 };
 
 
