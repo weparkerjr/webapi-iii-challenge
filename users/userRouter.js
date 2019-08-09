@@ -18,8 +18,11 @@ router.post('/', validateUser, (req, res) => {
     });
 });
 
+
+
 // 2. POST POSTS BY ID---------------------------------------
-router.post('/:id/posts', (req, res) => {
+//validateUserId, validatePost,
+router.post('/:id/posts',  (req, res) => {
     //const id = req.user.id;
     const text = req.body;
     console.log(text);
