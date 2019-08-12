@@ -1,15 +1,34 @@
-const express = 'express';
-
+// REQUIRED MODULES
+const express = require('express');
 const server = express();
+const helmet = require('helmet');
 
-server.get('/', (req, res) => {
-  res.send(`<h2>Let's write some middleware!</h2>`)
+
+// MIDDLEWARE
+server.use(express.json());
+server.use(helmet());
+server.use(logger);
+
+
+// USER ROUTER
+const userRouter = require("./users/userRouter");
+server.use("/api/users", userRouter)
+
+
+// HOMEPAGE WITH LOGGER
+server.get('/', logger, (req, res) => {
+  res.send(`<h2>Edwin Parker's webapi-iii AND -iv challenge</h2>`);
 });
 
-//custom middleware
 
+//CUSTOM MIDDLEWARE
 function logger(req, res, next) {
-
+  console.log(new Date().toUTCString());
+  // next();
+  console.log(`${req.method} Request`);
+  // next();
+  console.log(req.url);
+  next();
 };
 
 module.exports = server;
